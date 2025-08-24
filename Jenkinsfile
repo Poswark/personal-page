@@ -1,72 +1,81 @@
-@Library('sharedLibrary') _
-import boxung.DockerBuild
+@Library('shared-library') _
 
 pipeline {
     agent {
         kubernetes {
-            label 'kaniko'
-            yaml kanikoPodTemplate()
+            yaml kanikoTemplate()   // ← aquí usas el método de tu librería
         }
+    }
+    environment {
+        REPO_URL = 'https://github.com/Poswark/personal-page.git'
+        BRANCH = 'trunk'
     }
     parameters {
-        string(name: 'image', defaultValue: 'personal-page', description: 'Image name')
-        string(name: 'tag', defaultValue: '0.0.1', description: 'Image version')
+        string(name: 'IMAGE_NAME', defaultValue: 'personal-page', description: 'Image name')
+        string(name: 'TAG', defaultValue: '0.0.1', description: 'Image version')
     }
     stages {
-        stage('Build') {
+        
+        stage('Clone Repository') {
+            steps {
+                git url: "${REPO_URL}", branch: "${BRANCH}"
+                sh "ls -ltr ${WORKSPACE}"
+            }
+        }
+        stage('Build with Kaniko') {
+            steps {
+                container('kaniko') {
+                    sh '''
+                        IMAGE_NAME=${IMAGE_NAME}
+                        IMAGE_TAG=${TAG}
+                        /kaniko/executor \
+                          --context=${WORKSPACE} \
+                          --dockerfile=Dockerfile \
+                          --destination=poswark/${IMAGE_NAME}:${IMAGE_TAG} \
+                          --verbosity=info \
+                          --skip-tls-verify
+                    '''
+                }
+            }
+        }
+
+        stage('Scan with Trivy') {
             agent {
                 kubernetes {
-                    label 'kaniko'
-                    yaml kanikoPodTemplate()
+                    yaml trivyTemplate()
                 }
             }
             steps {
-                withCredentials([file(credentialsId: 'KANIKO_JSON', variable: 'DOCKER_CONFIG_JSON')]) {
-                    script {
-                        sh "cp ${env.DOCKER_CONFIG_JSON} /kaniko/.docker/config.json"
-                        DockerBuild.build(this, [image: "${params.image}", tag: "${params.tag}", dockerConfig: '/kaniko/.docker/config.json'])
-                        echo 'Building..'
-                    }
+                container('trivy') {
+                    sh """
+                        trivy image --insecure poswark/${params.IMAGE_NAME}:${params.TAG}
+                    """
                 }
             }
         }
-        stage('Unit Tests') {
+
+
+        stage('Scan with Gitleaks') {
             agent {
                 kubernetes {
-                    label 'trivy'
-                    yaml trivyPodTemplate()
+                    yaml gitleaksTemplate()
                 }
             }
             steps {
-                echo 'Running Unit Tests'
-                // Add your unit test commands here
-            }
-        }
-        stage('Security Scan') {
-            agent {
-                kubernetes {
-                    label 'trivy'
-                    yaml trivyPodTemplate()
+                container('gitleaks') {
+                    sh """
+                       mkdir -p results
+                       git clone ${REPO_URL} --branch ${BRANCH} repo
+                       cd repo
+                       gitleaks detect \
+                          --source . \
+                          --report-path ../results/gitleaks-report.json \
+                          --report-format json \
+                          --verbose || true
+                        
+                    """
                 }
             }
-            steps {
-                sh "docker pull poswark/${params.image}:${params.tag}"
-                sh "trivy image --insecure poswark/${params.image}:${params.tag}"
-            }
-        }
-    }
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-            // Add any success notifications or actions here
-        }
-        failure {
-            echo 'Pipeline failed.'
-            // Add any failure notifications or actions here
-        }
-        cleanup {
-            echo 'Cleaning up...'
-            // Add any cleanup actions here
         }
     }
 }
