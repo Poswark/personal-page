@@ -1,18 +1,26 @@
-FROM nginx:stable-alpine
+FROM nginxinc/nginx-unprivileged
 
-ENV TZ=America/Bogota
-RUN apk update --no-cache && apk upgrade --no-cache 
+ENV TZ=America/Bogota \
+    NGINX_USER=nginx \
+    NGINX_UID=101 \
+    NGINX_GID=101
 
-RUN apk add --no-cache --virtual .build-deps \
-    gcc musl-dev linux-headers bash tzdata  curl nginx
+USER root
+RUN apt-get update && apt-get install -y curl tzdata && \
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY ./mypersonalpage /usr/share/nginx/html
-VOLUME /usr/share/nginx/html
-VOLUME /etc/nginx
-COPY . . 
+WORKDIR /usr/share/nginx/html
 
-EXPOSE 80
+COPY index.html .
+COPY styles.css .
+COPY script.js .
 
+RUN chmod -R 755 /usr/share/nginx/html
+USER nginx
 
+EXPOSE 8080
+STOPSIGNAL SIGQUIT
 HEALTHCHECK --interval=20m --timeout=4s --start-period=30s --retries=5 \
-CMD curl -f http://localhost:80 || exit 1
+  CMD curl -f http://localhost:80 || exit 1
+
