@@ -9,7 +9,6 @@ function initNavigation() {
 
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
             if (pageYOffset >= sectionTop - 200) {
                 current = section.getAttribute('id');
             }
@@ -48,127 +47,243 @@ function scrollTo(sectionId) {
 
 // ===== DESCARGAR CV EN PDF =====
 async function descargarCV() {
+    const btn = document.getElementById('btn-download');
+
+    // Evitar múltiples clics mientras se genera
+    if (btn.disabled) return;
+
+    const textoOriginal = btn.textContent;
+    btn.textContent = '⏳ Generando...';
+    btn.disabled = true;
+
     try {
-        const btn = document.getElementById('btn-download');
-        const textoOriginal = btn.textContent;
-        btn.textContent = '⏳ GENERATING...';
-        btn.disabled = true;
+        // Cargar html2pdf solo si todavía no está cargada
+        if (typeof html2pdf === 'undefined') {
+            await new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
 
-        // Cargar librería html2pdf
-        const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+        // Fecha dinámica para el footer del PDF
+        const hoy = new Date();
+        const fechaFormateada = hoy.toLocaleDateString('es-CO', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
 
-        script.onload = function() {
-            const contenidoPDF = `
-                <div style="font-family: 'Courier New', monospace; padding: 30px; color: #ffffff; background: #0a0e27;">
-                    <div style="text-align: center; border-bottom: 2px solid #00ff88; padding-bottom: 20px; margin-bottom: 30px;">
-                        <h1 style="color: #00ff88; font-size: 28px; margin: 0; letter-spacing: 2px;">GIOVANNY ORJUELA</h1>
-                        <p style="color: #00d9ff; font-size: 14px; margin: 5px 0; letter-spacing: 1px;">DEVOPS & SRE ENGINEER</p>
-                        <p style="color: #b0bec5; font-size: 11px; margin: 10px 0;">
-                            📧 giovannyorjuel2@gmail.com | 📱 +57 311 479 3397 | 💼 linkedin.com/in/giovannyorjuel2 | 📍 Bogotá, Colombia
-                        </p>
+        const contenidoPDF = `
+            <div style="font-family: 'Segoe UI', Arial, sans-serif; padding: 40px; color: #2c2c2c; background: #ffffff; min-height: 100vh; line-height: 1.6;">
+                
+                <!-- HEADER -->
+                <div style="text-align: center; margin-bottom: 30px; padding-bottom: 22px; border-bottom: 2px solid #1a73e8;">
+                    <img src="images/profile.jpeg" alt="Giovanny Orjuela" style="width: 95px; height: 95px; border-radius: 50%; object-fit: cover; border: 2px solid #1a73e8; margin-bottom: 12px;">
+                    <h1 style="color: #1a1a1a; font-size: 26px; margin: 6px 0; font-weight: 700; letter-spacing: 0.5px;">GIOVANNY ORJUELA</h1>
+                    <p style="color: #1a73e8; font-size: 13px; margin: 4px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">DevOps & SRE Engineer</p>
+                    <div style="color: #555; font-size: 10.5px; margin-top: 10px; line-height: 1.8;">
+                        giovanny.orjuela@gmail.com &nbsp;|&nbsp; +57 311 479 XXXX &nbsp;|&nbsp; linkedin.com/in/giovannyorjuel2 &nbsp;|&nbsp; Bogotá, Colombia
                     </div>
+                </div>
 
-                    <div style="margin-bottom: 25px;">
-                        <h2 style="color: #00ff88; border-left: 3px solid #00ff88; padding-left: 10px; font-size: 14px; margin-bottom: 10px; letter-spacing: 1px;">PROFILE</h2>
-                        <p style="color: #b0bec5; font-size: 11px; line-height: 1.6;">
-                            DevOps & SRE Specialist with 8+ years of experience optimizing critical infrastructure, automating processes, and reducing operational costs. 
-                            Expert in Kubernetes, Jenkins, Ansible, Terraform, AWS, Azure, and FinOps. Proven track record of designing scalable, resilient architectures and implementing CI/CD pipelines.
-                        </p>
-                    </div>
+                <!-- RESUMEN PROFESIONAL -->
+                <div style="margin-bottom: 22px;">
+                    <h2 style="color: #1a1a1a; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1.5px solid #1a73e8;">Resumen Profesional</h2>
+                    <p style="color: #555; font-size: 10.5px; line-height: 1.7; text-align: justify; margin: 0;">
+                        Ingeniero DevOps & SRE especializado con 8+ años de experiencia optimizando infraestructura crítica, automatizando procesos y reduciendo costos operacionales. 
+                        Experto en Kubernetes, Jenkins, Ansible, Terraform, AWS, Azure y FinOps. Diseño de arquitecturas escalables y resilientes con implementación de pipelines CI/CD eficientes. 
+                        Pasión por la automatización de infraestructura y mejora continua.
+                    </p>
+                </div>
 
-                    <div style="margin-bottom: 25px;">
-                        <h2 style="color: #00ff88; border-left: 3px solid #00ff88; padding-left: 10px; font-size: 14px; margin-bottom: 10px; letter-spacing: 1px;">EXPERIENCE</h2>
-                        
-                        <div style="margin-bottom: 15px;">
-                            <h3 style="color: #00d9ff; font-size: 12px; margin-bottom: 3px;">DevOps & Infrastructure Specialist</h3>
-                            <p style="color: #00ff88; font-size: 10px; font-weight: bold; margin-bottom: 2px;">SETI S.A.S | Bogotá, D.C. | Jan 2019 - Present (5+ years)</p>
-                            <ul style="margin-left: 15px; font-size: 10px; color: #b0bec5; line-height: 1.6;">
-                                <li>Designed & implemented Kubernetes HA reducing downtime by 40%</li>
-                                <li>Created 50+ Ansible playbooks saving 25h/week of manual work</li>
-                                <li>Deployed Jenkins CI/CD pipelines achieving 70% faster deployments</li>
-                                <li>Implemented FinOps strategy optimizing cloud costs by 35%</li>
-                                <li>Administered 50+ Linux/AIX servers maintaining 99.8% uptime</li>
-                                <li>Deployed Helm charts for standardized Kubernetes deployments</li>
-                                <li>Implemented Prometheus & Grafana monitoring with AI anomaly detection</li>
-                            </ul>
+                <!-- EXPERIENCIA PROFESIONAL -->
+                <div style="margin-bottom: 22px;">
+                    <h2 style="color: #1a1a1a; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1.5px solid #1a73e8;">Experiencia Profesional</h2>
+                    
+                    <!-- Scotiabank Colpatria - Directo -->
+                    <div style="margin-bottom: 14px;">
+                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
+                            <h3 style="color: #1a1a1a; font-size: 10.5px; font-weight: 700; margin: 0;">DevOps y SRE Engineer</h3>
+                            <span style="color: #666; font-size: 9.5px;">Ago 2023 - Actualidad</span>
                         </div>
-
-                        <div style="margin-bottom: 15px;">
-                            <h3 style="color: #00d9ff; font-size: 12px; margin-bottom: 3px;">Unix Systems Administrator</h3>
-                            <p style="color: #00ff88; font-size: 10px; font-weight: bold; margin-bottom: 2px;">INDRA | Bogotá, D.C. | Jan 2018 - Dec 2018 (1 year)</p>
-                            <ul style="margin-left: 15px; font-size: 10px; color: #b0bec5; line-height: 1.6;">
-                                <li>UNIX Level 2 administration with SLA < 4h incident response</li>
-                                <li>RHEL hardening on 20+ servers achieving 100% vulnerability remediation</li>
-                                <li>High-impact incident management and escalation procedures</li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h3 style="color: #00d9ff; font-size: 12px; margin-bottom: 3px;">Junior Administrator - IBM Pseries</h3>
-                            <p style="color: #00ff88; font-size: 10px; font-weight: bold; margin-bottom: 2px;">DB-SYSTEM LTDA | Nov 2016 - Dec 2017 (1.2 years)</p>
-                            <ul style="margin-left: 15px; font-size: 10px; color: #b0bec5; line-height: 1.6;">
-                                <li>AIX servers administration and performance optimization</li>
-                                <li>System performance monitoring (CPU, memory, I/O analysis)</li>
-                                <li>Incident resolution maintaining 95% SLA compliance</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 25px;">
-                        <h2 style="color: #00ff88; border-left: 3px solid #00ff88; padding-left: 10px; font-size: 14px; margin-bottom: 10px; letter-spacing: 1px;">TECHNICAL SKILLS</h2>
-                        <div style="font-size: 10px; color: #b0bec5; line-height: 1.8;">
-                            <p><span style="color: #00ff88; font-weight: bold;">Operating Systems:</span> Linux (RHEL, CentOS), AIX, Unix</p>
-                            <p><span style="color: #00ff88; font-weight: bold;">Kubernetes & Orchestration:</span> Kubernetes HA, Helm, OpenShift, Docker, Docker Compose</p>
-                            <p><span style="color: #00ff88; font-weight: bold;">CI/CD & Automation:</span> Jenkins, Ansible, Terraform, Infrastructure-as-Code</p>
-                            <p><span style="color: #00ff88; font-weight: bold;">Cloud & FinOps:</span> AWS, Azure, Cost Optimization, Reserved Instances, Tagging</p>
-                            <p><span style="color: #00ff88; font-weight: bold;">Programming:</span> Python (automation, APIs), Bash/Shell scripting</p>
-                            <p><span style="color: #00ff88; font-weight: bold;">Monitoring:</span> Prometheus, Grafana, Alerting, ELK Stack</p>
-                            <p><span style="color: #00ff88; font-weight: bold;">AI/ML Infrastructure:</span> Anomaly Detection, Capacity Prediction, MLOps</p>
-                            <p><span style="color: #00ff88; font-weight: bold;">Security:</span> RBAC, Hardening, Vulnerability Management, Compliance</p>
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 25px;">
-                        <h2 style="color: #00ff88; border-left: 3px solid #00ff88; padding-left: 10px; font-size: 14px; margin-bottom: 10px; letter-spacing: 1px;">CERTIFICATIONS</h2>
-                        <ul style="margin-left: 15px; font-size: 10px; color: #b0bec5; line-height: 1.8;">
-                            <li>Red Hat Certified System Administrator (RHCSA) - 2019 | ID: 190-028-894</li>
-                            <li>The Linux Foundation: LFS158x - Introduction to Kubernetes - 2019</li>
-                            <li>CertiProf: Scrum Foundation Professional (SFP) - 2020</li>
+                        <p style="color: #1a73e8; font-size: 9.5px; font-weight: 600; margin: 2px 0 6px 0;">Scotiabank Colpatria | Bogotá, D.C.</p>
+                        <ul style="margin: 0; padding-left: 16px; font-size: 9.5px; color: #555;">
+                            <li style="margin-bottom: 3px;">Migración de aplicaciones a cloud native infrastructure en GCP con Kubernetes</li>
+                            <li style="margin-bottom: 3px;">Creación de playbooks en Ansible para automatización de tareas operativas</li>
+                            <li style="margin-bottom: 3px;">Implementación de pipelines Jenkins CI/CD para el IDP del equipo</li>
+                            <li style="margin-bottom: 3px;">Estrategia FinOps con optimización de costos cloud del 35%</li>
+                            <li>Mejora de la resiliencia de aplicaciones en entornos cloud</li>
                         </ul>
                     </div>
 
-                    <div>
-                        <h2 style="color: #00ff88; border-left: 3px solid #00ff88; padding-left: 10px; font-size: 14px; margin-bottom: 10px; letter-spacing: 1px;">EDUCATION</h2>
-                        <p style="color: #b0bec5; font-size: 10px;">
-                            <span style="color: #00ff88; font-weight: bold;">Bachelor of Engineering - Systems Engineering</span><br>
-                            Corporación Universitaria Remington | 2011 - 2015
-                        </p>
+                    <!-- Periferia IT Group - Scotiabank -->
+                    <div style="margin-bottom: 14px;">
+                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
+                            <h3 style="color: #1a1a1a; font-size: 10.5px; font-weight: 700; margin: 0;">Site Reliability Engineer (SRE)</h3>
+                            <span style="color: #666; font-size: 9.5px;">Jul 2021 - Ago 2023</span>
+                        </div>
+                        <p style="color: #1a73e8; font-size: 9.5px; font-weight: 600; margin: 2px 0 6px 0;">Periferia IT Group - Scotiabank Colpatria | Bogotá, D.C.</p>
+                        <ul style="margin: 0; padding-left: 16px; font-size: 9.5px; color: #555;">
+                            <li style="margin-bottom: 3px;">Creación de pipelines CI/CD con Jenkins</li>
+                            <li style="margin-bottom: 3px;">Definición de SLO y SLI para sistemas críticos</li>
+                            <li style="margin-bottom: 3px;">Diseño de soluciones orientadas a confiabilidad, disponibilidad, rendimiento, resiliencia y seguridad</li>
+                            <li style="margin-bottom: 3px;">Desarrollo en Python y scripting para automatización</li>
+                            <li>Implementación y mejora de informes postmortem</li>
+                        </ul>
+                    </div>
+
+                    <!-- SETI - Cliente ATH -->
+                    <div style="margin-bottom: 14px;">
+                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
+                            <h3 style="color: #1a1a1a; font-size: 10.5px; font-weight: 700; margin: 0;">Administrador Unix y Kubernetes</h3>
+                            <span style="color: #666; font-size: 9.5px;">Ene 2019 - Jul 2021</span>
+                        </div>
+                        <p style="color: #1a73e8; font-size: 9.5px; font-weight: 600; margin: 2px 0 6px 0;">SETI S.A.S - Cliente ATH | Bogotá, D.C.</p>
+                        <ul style="margin: 0; padding-left: 16px; font-size: 9.5px; color: #555;">
+                            <li style="margin-bottom: 3px;">Administración de sistemas Linux RHEL 7</li>
+                            <li style="margin-bottom: 3px;">Implementación y administración de clúster Kubernetes HA, Docker EE Mirantis Kubernetes Engine</li>
+                            <li style="margin-bottom: 3px;">Creación de playbooks con Ansible</li>
+                            <li style="margin-bottom: 3px;">Monitoreo de servidores mediante Grafana y Prometheus</li>
+                            <li>Hardening de plataformas Red Hat 6 y 7</li>
+                        </ul>
+                    </div>
+
+                    <!-- INDRA - Cliente Claro -->
+                    <div style="margin-bottom: 14px;">
+                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
+                            <h3 style="color: #1a1a1a; font-size: 10.5px; font-weight: 700; margin: 0;">Administrador Unix</h3>
+                            <span style="color: #666; font-size: 9.5px;">Ene 2018 - Dic 2018</span>
+                        </div>
+                        <p style="color: #1a73e8; font-size: 9.5px; font-weight: 600; margin: 2px 0 6px 0;">INDRA - Cliente Claro | Bogotá, D.C.</p>
+                        <ul style="margin: 0; padding-left: 16px; font-size: 9.5px; color: #555;">
+                            <li style="margin-bottom: 3px;">Administración de Sistema Operativo Unix nivel 2</li>
+                            <li style="margin-bottom: 3px;">Solución de incidentes de complejidad mediana y alta</li>
+                            <li style="margin-bottom: 3px;">Automatización de despliegues utilizando GitOps, Helm y Jenkins</li>
+                            <li style="margin-bottom: 3px;">Gestión de alarmas de mediano y mayor impacto (RHEL y AIX)</li>
+                            <li style="margin-bottom: 3px;">Remediación de vulnerabilidades y actualización de SO</li>
+                            <li>Hardening de plataformas Red Hat 6 y 7</li>
+                        </ul>
+                    </div>
+
+                    <!-- DB-SYSTEM -->
+                    <div style="margin-bottom: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
+                            <h3 style="color: #1a1a1a; font-size: 10.5px; font-weight: 700; margin: 0;">Administrador Sistemas Operativos Junior - IBM PSeries</h3>
+                            <span style="color: #666; font-size: 9.5px;">Nov 2016 - Dic 2017</span>
+                        </div>
+                        <p style="color: #1a73e8; font-size: 9.5px; font-weight: 600; margin: 2px 0 6px 0;">DB-SYSTEM LTDA | Bogotá, D.C.</p>
+                        <ul style="margin: 0; padding-left: 16px; font-size: 9.5px; color: #555;">
+                            <li style="margin-bottom: 3px;">Administración y optimización de servidores AIX</li>
+                            <li style="margin-bottom: 3px;">Gestión de monitoreo de performance (CPU, RAM, IO)</li>
+                            <li style="margin-bottom: 3px;">Respuesta a requerimientos técnicos e incidentes de SO</li>
+                            <li>Gestión de estado de usuarios, cambio de contraseñas y validación de parámetros</li>
+                        </ul>
                     </div>
                 </div>
-            `;
 
-            const opt = {
-                margin: 8,
-                filename: 'Giovanny_Orjuela_DevOps_SRE.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
+                <!-- COMPETENCIAS TÉCNICAS -->
+                <div style="margin-bottom: 20px;">
+                    <h2 style="color: #1a1a1a; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1.5px solid #1a73e8;">Competencias Técnicas</h2>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 9.5px;">
+                        <tr>
+                            <td style="padding: 4px 0; color: #1a73e8; font-weight: 600; width: 28%;">Sistemas Operativos</td>
+                            <td style="padding: 4px 0; color: #555;">Linux (RHEL, CentOS), AIX, Unix</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px 0; color: #1a73e8; font-weight: 600;">Kubernetes & Orquestación</td>
+                            <td style="padding: 4px 0; color: #555;">Kubernetes HA, Helm, OpenShift, Docker, Docker Compose</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px 0; color: #1a73e8; font-weight: 600;">CI/CD & Automatización</td>
+                            <td style="padding: 4px 0; color: #555;">Jenkins, Ansible, Terraform, Infrastructure-as-Code</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px 0; color: #1a73e8; font-weight: 600;">Plataformas Cloud</td>
+                            <td style="padding: 4px 0; color: #555;">AWS, Azure, GCP, FinOps, Optimización de Costos</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px 0; color: #1a73e8; font-weight: 600;">Programación</td>
+                            <td style="padding: 4px 0; color: #555;">Python, Bash/Shell, Scripting</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px 0; color: #1a73e8; font-weight: 600;">Monitoreo & Observabilidad</td>
+                            <td style="padding: 4px 0; color: #555;">Prometheus, Grafana, Alertas</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 4px 0; color: #1a73e8; font-weight: 600;">IA & Machine Learning</td>
+                            <td style="padding: 4px 0; color: #555;">Detección de Anomalías, Predicción de Capacidad, MLOps</td>
+                        </tr>
+                    </table>
+                </div>
 
-            html2pdf().set(opt).from(contenidoPDF).save();
+                <!-- CERTIFICACIONES -->
+                <div style="margin-bottom: 20px;">
+                    <h2 style="color: #1a1a1a; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1.5px solid #1a73e8;">Certificaciones</h2>
+                    
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <div style="flex: 1; min-width: 45%;">
+                            <p style="font-size: 9.5px; margin: 0 0 1px 0; color: #1a1a1a; font-weight: 600;">Red Hat Certified System Administrator (RHCSA)</p>
+                            <p style="font-size: 9px; margin: 0 0 8px 0; color: #777;">2019 &nbsp;|&nbsp; ID: 190-028-894</p>
 
-            setTimeout(() => {
-                btn.textContent = textoOriginal;
-                btn.disabled = false;
-            }, 1500);
+                            <p style="font-size: 9.5px; margin: 0 0 1px 0; color: #1a1a1a; font-weight: 600;">AWS Certified Cloud Practitioner (CLF-C01)</p>
+                            <p style="font-size: 9px; margin: 0 0 8px 0; color: #777;">2022 &nbsp;|&nbsp; Certificate of Completion</p>
+
+                            <p style="font-size: 9.5px; margin: 0 0 1px 0; color: #1a1a1a; font-weight: 600;">Harness Chaos Engineering</p>
+                            <p style="font-size: 9px; margin: 0; color: #777;">2023 &nbsp;|&nbsp; Harness University Course</p>
+                        </div>
+                        <div style="flex: 1; min-width: 45%;">
+                            <p style="font-size: 9.5px; margin: 0 0 1px 0; color: #1a1a1a; font-weight: 600;">Kubernetes and Cloud Native Essentials (LFS250)</p>
+                            <p style="font-size: 9px; margin: 0 0 8px 0; color: #777;">2024 &nbsp;|&nbsp; Certificate of Completion</p>
+
+                            <p style="font-size: 9.5px; margin: 0 0 1px 0; color: #1a1a1a; font-weight: 600;">LFS169: Introduction to GitOps</p>
+                            <p style="font-size: 9px; margin: 0; color: #777;">2024 &nbsp;|&nbsp; Certificate of Completion</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOGROS CLAVE -->
+                <div style="margin-bottom: 18px; background: #f0f4ff; padding: 10px 12px; border-left: 3px solid #1a73e8; border-radius: 0 4px 4px 0;">
+                    <h2 style="color: #1a1a1a; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 7px 0;">Logros Clave</h2>
+                    <ul style="padding-left: 16px; font-size: 9.5px; color: #555; margin: 0;">
+                        <li style="margin-bottom: 3px;"><strong>Optimización de costos:</strong> Reducción del 35% en costos cloud mediante estrategias FinOps</li>
+                        <li style="margin-bottom: 3px;"><strong>Automatización:</strong> Playbooks Ansible que eliminan tareas manuales repetitivas</li>
+                        <li style="margin-bottom: 3px;"><strong>CI/CD:</strong> Pipelines Jenkins que acelerad el ciclo de despliegue</li>
+                        <li style="margin-bottom: 3px;"><strong>Alta disponibilidad:</strong> Clústeres Kubernetes HA en entornos de producción</li>
+                        <li><strong>Observabilidad:</strong> Stack de monitoreo con Prometheus y Grafana en 50+ servidores</li>
+                    </ul>
+                </div>
+
+                <!-- FOOTER -->
+                <div style="text-align: center; border-top: 1px solid #ddd; padding-top: 12px; margin-top: 14px;">
+                    <p style="color: #999; font-size: 8.5px; margin: 0; line-height: 1.6;">
+                        Giovanny Orjuela | DevOps & SRE Engineer | giovanny.orjuela@gmail.com<br>
+                        linkedin.com/in/giovannyorjuel2 | Bogotá, Colombia<br>
+                        <span style="color: #1a73e8; font-size: 7.5px;">CV generado el ${fechaFormateada}</span>
+                    </p>
+                </div>
+            </div>
+        `;
+
+        const opt = {
+            margin: 8,
+            filename: 'Giovanny_Orjuela_DevOps_SRE_CV.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2.5, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
-        document.head.appendChild(script);
+        await html2pdf().set(opt).from(contenidoPDF).save();
 
     } catch (error) {
-        console.error('Error al descargar CV:', error);
-        alert('Error generating PDF. Please try again.');
+        console.error('Error al generar PDF:', error);
+        alert('Error al generar el CV. Por favor intenta nuevamente.');
+    } finally {
+        // Restaurar botón siempre, sin importar si hubo error o no
+        btn.textContent = '↓ Descargar HV';
+        btn.disabled = false;
     }
 }
 
@@ -182,7 +297,7 @@ function initTimelineAnimation() {
                 entry.target.classList.add('active');
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.2 });
 
     timelineItems.forEach(item => observador.observe(item));
 }
@@ -195,12 +310,19 @@ function initScrollAnimations() {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
                 setTimeout(() => {
-                    entry.target.style.animation = 'slideInUp 0.6s ease-out forwards';
-                    entry.target.style.opacity = '0';
-                }, index * 50);
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                }, index * 80);
             }
         });
     }, { threshold: 0.1 });
+
+    // Estado inicial oculto
+    elementos.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+    });
 
     elementos.forEach(element => observador.observe(element));
 }
@@ -208,7 +330,8 @@ function initScrollAnimations() {
 // ===== CURSOR GLOW EFFECT =====
 function initCursorGlow() {
     const cursorGlow = document.querySelector('.cursor-glow');
-    
+    if (!cursorGlow) return;
+
     document.addEventListener('mousemove', (e) => {
         cursorGlow.style.left = (e.clientX - 200) + 'px';
         cursorGlow.style.top = (e.clientY - 200) + 'px';
@@ -217,10 +340,11 @@ function initCursorGlow() {
 
 // ===== TERMINAL TYPING EFFECT =====
 function initTerminalEffect() {
-    const lines = document.querySelectorAll('.terminal-body .line:not(.output)');
-    
+    const lines = document.querySelectorAll('.terminal-body .line');
+
     lines.forEach((line, index) => {
-        line.style.animation = `slideInLeft 0.5s ease-out ${index * 0.1}s both`;
+        line.style.opacity = '0';
+        line.style.animation = `slideInLeft 0.4s ease-out ${index * 0.15}s forwards`;
     });
 }
 
@@ -235,12 +359,12 @@ function initButtonHandlers() {
 
     if (contactBtn) {
         contactBtn.addEventListener('click', () => {
-            window.location.href = 'mailto:giovannyorjuel2@gmail.com?subject=Interested in DevOps Engineer';
+            window.location.href = 'mailto:giovanny.orjuela@gmail.com?subject=Interested in DevOps Engineer';
         });
     }
 }
 
-// ===== AGREGAR ANIMACIONES CSS DINÁMICAS =====
+// ===== ANIMACIONES CSS DINÁMICAS =====
 function loadDynamicAnimations() {
     const style = document.createElement('style');
     style.textContent = `
@@ -258,7 +382,7 @@ function loadDynamicAnimations() {
         @keyframes slideInLeft {
             from {
                 opacity: 0;
-                transform: translateX(-30px);
+                transform: translateX(-20px);
             }
             to {
                 opacity: 1;
@@ -266,12 +390,8 @@ function loadDynamicAnimations() {
             }
         }
 
-        .glass-card {
-            animation: slideInUp 0.6s ease-out both;
-        }
-
         button:active {
-            transform: scale(0.98);
+            transform: scale(0.96);
         }
 
         .nav-link {
@@ -288,6 +408,17 @@ function loadDynamicAnimations() {
             background: #00ff88;
             transition: width 0.3s ease;
         }
+
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 100%;
+        }
+
+        /* Botón descarga deshabilitado */
+        #btn-download:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
     `;
     document.head.appendChild(style);
 }
@@ -295,7 +426,7 @@ function loadDynamicAnimations() {
 // ===== INICIALIZACIÓN =====
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Portfolio DevOps loaded successfully');
-    
+
     initNavigation();
     initTimelineAnimation();
     initScrollAnimations();
@@ -304,7 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initButtonHandlers();
     loadDynamicAnimations();
 
-    // Fade in effect
+    // Fade in inicial de la página
     document.body.style.opacity = '0';
     setTimeout(() => {
         document.body.style.opacity = '1';
@@ -316,3 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('error', (event) => {
     console.error('Error:', event.error);
 });
+window.addEventListener('unhandledrejection', (event) => {
+    console.error('Promise rejected:', event.reason);
+});
+// ===== END OF SCRIPT =====

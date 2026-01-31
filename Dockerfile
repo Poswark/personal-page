@@ -15,6 +15,7 @@ WORKDIR /usr/share/nginx/html
 COPY index.html .
 COPY styles.css .
 COPY script.js .
+COPY images/ ./images/
 
 RUN chmod -R 755 /usr/share/nginx/html
 USER nginx
