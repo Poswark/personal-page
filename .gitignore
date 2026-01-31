@@ -1,0 +1,54 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Logs
+logs/
+*.log
+
+# Docker
+docker-compose.override.yml
+.docker/
+
+# Build
+dist/
+build/
+
+# Coverage
+coverage/
+.coverage
+
+# Cache
+.cache
+.eslintcache
+.test-cache
+
+# Testing
+jest.config.js
+test/
+
+# Temporary
+*.tmp
+*.bak
+
+prompt.md

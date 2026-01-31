@@ -1,8 +1,19 @@
-version: "3.3"  
 services:
   web:
     build: .
+    container_name: nginx-secure
     ports:
-      - "80:80"
+      - "8080:8080"
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+      - /var/cache/nginx
+    pids_limit: 100
+    mem_limit: 256m
+    cpus: "0.50"
 
-    container_name: PersonalWeb
+    restart: unless-stopped

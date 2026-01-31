@@ -1,0 +1,64 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# GitHub
+.github
+.github/workflows
+.github/lighthouse
+
+# CI/CD
+.gitlab-ci.yml
+.travis.yml
+azure-pipelines.yml
+
+# Node modules y dependencias
+node_modules/
+npm-debug.log
+yarn.lock
+package-lock.json
+
+# Documentación
+*.md
+README.md
+CHANGELOG.md
+LICENSE
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+.AppleDouble
+
+# Logs
+logs
+*.log
+
+# Caches
+.cache
+.eslintcache
+
+# Testing
+coverage
+.test-cache
+jest.config.js
+
+# Build artifacts (si hay)
+dist/
+build/
+
+# Otros
+*.bak
+*.tmp
+.docker
+docker-compose.override.yml

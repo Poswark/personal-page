@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giovanny Orjuela - DevOps & SRE Engineer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- CURSOR GLOW -->
+    <div class="cursor-glow"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">→</span>
+                <span class="logo-text"> { poswark }</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#hero" class="nav-link active">HOME</a>
+                <a href="#about" class="nav-link">ABOUT</a>
+                <a href="#experience" class="nav-link">EXPERIENCE</a>
+                <a href="#skills" class="nav-link">SKILLS</a>
+                <a href="#contact" class="nav-link">CONTACT</a>
+                <button class="btn-download" id="btn-download">↓ DOWNLOAD CV</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ANIMATED BACKGROUND -->
+    <div class="bg-animation">
+        <div class="gradient-bg"></div>
+        <div class="grain"></div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">~/.profile</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="line">
+                        <span class="prompt">$</span>
+                        <span class="command">whoami</span>
+                    </div>
+                    <div class="line output">giovanny.orjuela</div>
+
+                    <div class="line">
+                        <span class="prompt">$</span>
+                        <span class="command">cat skills.txt</span>
+                    </div>
+                    <div class="line output">DevOps | SRE | Cloud Infrastructure | Kubernetes | Jenkins | Ansible</div>
+
+                    <div class="line">
+                        <span class="prompt">$</span>
+                        <span class="command">echo "Experience: 8+ years"</span>
+                    </div>
+                    <div class="line output">Experience: 8+ years</div>
+
+                    <div class="line">
+                        <span class="prompt">$</span>
+                        <span class="command">ls -la /expertise</span>
+                    </div>
+                    <div class="line output">
+                        <div>drwx K8s/ Docker/ Jenkins/ Terraform/</div>
+                        <div>drwx AWS/ Azure/ FinOps/ Python/</div>
+                        <div>-rw CloudOps.txt Automation.txt Monitoring.txt</div>
+                    </div>
+
+                    <div class="line">
+                        <span class="prompt">$</span>
+                        <span class="blink">_</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-text">
+                <h1 class="title">
+                    <span class="gradient-text">GIOVANNY ORJUELA</span>
+                </h1>
+                <p class="subtitle">DevOps & SRE Engineer</p>
+                <p class="description">
+                    8+ años optimizando infraestructuras críticas, automatizando procesos y reduciendo costos operacionales.
+                    Especialista en Kubernetes, Jenkins, Ansible y Cloud Architecture.
+                </p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary" onclick="scrollTo('about')">Explore More</button>
+                    <button class="btn btn-secondary" id="btn-contact">Get in Touch</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Scroll to discover</span>
+            <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="currentColor" d="M7 10l5 5 5-5z"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">ABOUT ME</h2>
+            
+            <div class="about-grid">
+                <div class="glass-card">
+                    <h3>Who I Am</h3>
+                    <p>
+                        Ingeniero especializado en infraestructura moderna y operaciones en la nube. Mi pasión es 
+                        transformar operaciones manuales en automatización inteligente, reduciendo costos y mejorando 
+                        la confiabilidad de sistemas críticos.
+                    </p>
+                </div>
+
+                <div class="glass-card">
+                    <h3>My Focus</h3>
+                    <p>
+                        DevOps & SRE: Diseño de pipelines CI/CD, automatización con Ansible, orquestación Kubernetes 
+                        y optimización de costos cloud (FinOps). Creo infraestructuras escalables y resilientes.
+                    </p>
+                </div>
+
+                <div class="glass-card">
+                    <h3>Tech Stack</h3>
+                    <p>
+                        Kubernetes | Docker | Jenkins | Terraform | Ansible | Python | AWS | Azure | 
+                        Prometheus | Grafana | IA/ML para infraestructura
+                    </p>
+                </div>
+
+                <div class="glass-card">
+                    <h3>Goal</h3>
+                    <p>
+                        Impulsar transformación digital mediante infraestructura automatizada, observabilidad avanzada 
+                        y arquitecturas cloud-native resilientes.
+                    </p>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <h4>8+</h4>
+                    <p>Años de Experiencia</p>
+                </div>
+                <div class="stat">
+                    <h4>50+</h4>
+                    <p>Servidores Administrados</p>
+                </div>
+                <div class="stat">
+                    <h4>99.8%</h4>
+                    <p>Disponibilidad</p>
+                </div>
+                <div class="stat">
+                    <h4>35%</h4>
+                    <p>Reducción Costos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">EXPERIENCE</h2>
+
+            <div class="experience-timeline">
+                <div class="timeline-item active">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="exp-header">
+                            <h3>DevOps & Infrastructure Specialist</h3>
+                            <span class="company-badge">SETI S.A.S</span>
+                        </div>
+                        <p class="date">Jan 2019 - Present (5+ years)</p>
+                        <ul class="achievements">
+                            <li><span class="accent">→</span> Kubernetes HA implementation | 40% downtime reduction</li>
+                            <li><span class="accent">→</span> 50+ Ansible playbooks | 25h/week automation savings</li>
+                            <li><span class="accent">→</span> Jenkins CI/CD pipelines | 70% faster deployments</li>
+                            <li><span class="accent">→</span> FinOps strategy | 35% cloud cost optimization</li>
+                            <li><span class="accent">→</span> 50+ Linux/AIX servers | 99.8% uptime</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="exp-header">
+                            <h3>Unix Systems Administrator</h3>
+                            <span class="company-badge">INDRA</span>
+                        </div>
+                        <p class="date">Jan 2018 - Dec 2018 (1 year)</p>
+                        <ul class="achievements">
+                            <li><span class="accent">→</span> UNIX Level 2 administration | SLA < 4h</li>
+                            <li><span class="accent">→</span> RHEL hardening | 100% vulnerability remediation</li>
+                            <li><span class="accent">→</span> High-impact incident management</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="exp-header">
+                            <h3>Junior Administrator - IBM Pseries</h3>
+                            <span class="company-badge">DB-SYSTEM LTDA</span>
+                        </div>
+                        <p class="date">Nov 2016 - Dec 2017 (1.2 years)</p>
+                        <ul class="achievements">
+                            <li><span class="accent">→</span> AIX servers administration & optimization</li>
+                            <li><span class="accent">→</span> Performance monitoring (CPU, memory, I/O)</li>
+                            <li><span class="accent">→</span> Incident resolution | SLA > 95%</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">SKILLS & EXPERTISE</h2>
+
+            <div class="skills-grid">
+                <div class="skill-category glass-card">
+                    <h3>🐧 Operating Systems</h3>
+                    <div class="tags">
+                        <span class="tag">Linux (RHEL)</span>
+                        <span class="tag">AIX</span>
+                        <span class="tag">Unix</span>
+                        <span class="tag">CentOS</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3>☸️ Kubernetes & Orchestration</h3>
+                    <div class="tags">
+                        <span class="tag highlight">Kubernetes HA</span>
+                        <span class="tag highlight">Helm</span>
+                        <span class="tag highlight">OpenShift</span>
+                        <span class="tag">Docker Swarm</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3>🐳 Containerization</h3>
+                    <div class="tags">
+                        <span class="tag highlight">Docker</span>
+                        <span class="tag">Docker Compose</span>
+                        <span class="tag">Registries</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3>⚙️ CI/CD & Automation</h3>
+                    <div class="tags">
+                        <span class="tag highlight">Jenkins</span>
+                        <span class="tag highlight">Ansible</span>
+                        <span class="tag highlight">Terraform</span>
+                        <span class="tag">IaC</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3>☁️ Cloud Platforms</h3>
+                    <div class="tags">
+                        <span class="tag highlight">AWS</span>
+                        <span class="tag highlight">Azure</span>
+                        <span class="tag highlight">FinOps</span>
+                        <span class="tag">Cost Optimization</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3>🐍 Programming</h3>
+                    <div class="tags">
+                        <span class="tag highlight">Python</span>
+                        <span class="tag">Bash/Shell</span>
+                        <span class="tag">Scripting</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3>📊 Monitoring & Observability</h3>
+                    <div class="tags">
+                        <span class="tag highlight">Prometheus</span>
+                        <span class="tag highlight">Grafana</span>
+                        <span class="tag">Alerting</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3>🤖 AI & Machine Learning</h3>
+                    <div class="tags">
+                        <span class="tag highlight">Anomaly Detection</span>
+                        <span class="tag highlight">Capacity Prediction</span>
+                        <span class="tag">ML Ops</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section id="certifications" class="certifications">
+        <div class="container">
+            <h2 class="section-title">CERTIFICATIONS</h2>
+
+            <div class="certs-grid">
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">🏆</div>
+                    <h3>Red Hat Certified System Administrator</h3>
+                    <p class="cert-year">2019</p>
+                    <p class="cert-code">ID: 190-028-894</p>
+                </div>
+
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">☸️</div>
+                    <h3>The Linux Foundation: LFS158x</h3>
+                    <p class="cert-year">2019</p>
+                    <p class="cert-code">Introduction to Kubernetes</p>
+                </div>
+
+                <div class="cert-card glass-card">
+                    <div class="cert-icon">🎯</div>
+                    <h3>CertiProf: Scrum Foundation</h3>
+                    <p class="cert-year">2020</p>
+                    <p class="cert-code">Professional (SFP)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">GET IN TOUCH</h2>
+
+            <div class="contact-content">
+                <div class="contact-item glass-card">
+                    <span class="contact-icon">📧</span>
+                    <div>
+                        <p>Email</p>
+                        <a href="mailto:giovannyorjuel2@gmail.com">giovannyorjuel2@gmail.com</a>
+                    </div>
+                </div>
+
+                <!-- <div class="contact-item glass-card">
+                    <span class="contact-icon">📱</span>
+                    <div>
+                        <p>Phone</p>
+                        <a href="tel:+57 ">+57 </a>
+                    </div>
+                </div> -->
+
+                <div class="contact-item glass-card">
+                    <span class="contact-icon">💼</span>
+                    <div>
+                        <p>LinkedIn</p>
+                        <a href="https://linkedin.com/in/giovannyorjuel2" target="_blank">linkedin.com/in/giovannyorjuel2</a>
+                    </div>
+                </div>
+
+                <div class="contact-item glass-card">
+                    <span class="contact-icon">📍</span>
+                    <div>
+                        <p>Location</p>
+                        <a href="#">Bogotá, Colombia</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>Made with <span class="accent">❤️</span> by Giovanny Orjuela | DevOps Engineer</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
