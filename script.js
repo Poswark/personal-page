@@ -85,7 +85,7 @@ async function descargarCV() {
                     <h1 style="color: #1a1a1a; font-size: 26px; margin: 6px 0; font-weight: 700; letter-spacing: 0.5px;">GIOVANNY ORJUELA</h1>
                     <p style="color: #1a73e8; font-size: 13px; margin: 4px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">DevOps & SRE Engineer</p>
                     <div style="color: #555; font-size: 10.5px; margin-top: 10px; line-height: 1.8;">
-                        giovanny.orjuela@gmail.com &nbsp;|&nbsp; +57 311 479 XXXX &nbsp;|&nbsp; linkedin.com/in/giovannyorjuel2 &nbsp;|&nbsp; Bogotá, Colombia
+                        giovannyorjuel2@gmail.com &nbsp;|&nbsp; +57 311 479 3397&nbsp;|&nbsp; linkedin.com/in/giovannyorjuel2 &nbsp;|&nbsp; Bogotá, Colombia
                     </div>
                 </div>
 
@@ -259,7 +259,7 @@ async function descargarCV() {
                 <!-- FOOTER -->
                 <div style="text-align: center; border-top: 1px solid #ddd; padding-top: 12px; margin-top: 14px;">
                     <p style="color: #999; font-size: 8.5px; margin: 0; line-height: 1.6;">
-                        Giovanny Orjuela | DevOps & SRE Engineer | giovanny.orjuela@gmail.com<br>
+                        Giovanny Orjuela | DevOps & SRE Engineer | giovannyorjuel2@gmail.com<br>
                         linkedin.com/in/giovannyorjuel2 | Bogotá, Colombia<br>
                         <span style="color: #1a73e8; font-size: 7.5px;">CV generado el ${fechaFormateada}</span>
                     </p>
@@ -359,7 +359,7 @@ function initButtonHandlers() {
 
     if (contactBtn) {
         contactBtn.addEventListener('click', () => {
-            window.location.href = 'mailto:giovanny.orjuela@gmail.com?subject=Interested in DevOps Engineer';
+            window.location.href = 'mailto:giovannyorjuel2@gmail.com?subject=Interested in DevOps Engineer';
         });
     }
 }
