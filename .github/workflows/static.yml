@@ -1,43 +1,61 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy Portfolio to GitHub Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["trunk"]
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches: ["trunk", "feature/*"]
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Validate required files
+        run: |
+          echo "📁 Verificando estructura del proyecto..."
+          for file in index.html styles.css script.js; do
+            if [ ! -f "$file" ]; then
+              echo "❌ Falta el archivo requerido: $file"
+              exit 1
+            fi
+          done
+          echo "✅ Todos los archivos requeridos están presentes"
+
+          # Informar si cv.pdf está presente (modo descarga directa activo)
+          if [ -f "cv.pdf" ]; then
+            echo "📄 cv.pdf encontrado — descarga directa habilitada"
+          else
+            echo "ℹ️  cv.pdf no encontrado — se usará generación dinámica del PDF"
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: '.'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Deployment summary
+        run: |
+          echo "🚀 Portfolio desplegado exitosamente"
+          echo "🌐 URL: ${{ steps.deployment.outputs.page_url }}"
