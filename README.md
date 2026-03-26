@@ -112,10 +112,7 @@ git add cv.pdf && git commit -m "feat: add static CV" && git push
 
 | Canal | Info |
 |-------|------|
-| 📧 Email | giovannyorjuel2@gmail.com |
 | 💼 LinkedIn | [linkedin.com/in/giovannyorjuel2](https://linkedin.com/in/giovannyorjuel2) |
-| 🐙 GitHub | [github.com/poswark](https://github.com/poswark) |
-| 📍 Ubicación | Bogotá, Colombia |
 
 ---
 
