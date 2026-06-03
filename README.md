@@ -4,7 +4,9 @@
 
 ![Portfolio Preview](images/profile.jpeg)
 
-**🌐 [Ver Portfolio en Vivo](https://poswark.github.io)**  
+**🌐 [Ver Portfolio en Vivo](https://poswark.github.io/personal-page/)**  
+
+
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-giovannyorjuel2-0077B5?style=flat&logo=linkedin)](https://linkedin.com/in/giovannyorjuel2)
 [![GitHub](https://img.shields.io/badge/GitHub-poswark-181717?style=flat&logo=github)](https://github.com/poswark)
 [![Deploy](https://github.com/poswark/poswark.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/poswark/poswark.github.io/actions/workflows/deploy.yml)
