@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y curl tzdata && \
 
 WORKDIR /usr/share/nginx/html
 
+COPY cv* .
 COPY index.html .
 COPY styles.css .
 COPY script.js .

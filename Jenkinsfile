@@ -3,7 +3,7 @@
 pipeline {
     agent {
         kubernetes {
-            yaml kanikoTemplate()   // ← aquí usas el método de tu librería
+            yaml kanikoTemplate()   
         }
     }
     environment {
