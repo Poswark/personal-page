@@ -118,6 +118,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1.5rem;
 }
 
 .logo {
@@ -144,6 +145,7 @@ body {
     gap: 2rem;
     align-items: center;
     list-style: none;
+    margin-left: auto;
 }
 
 .nav-link {
@@ -193,6 +195,71 @@ body {
 .btn-download:hover {
     transform: translateY(-3px);
     box-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+}
+
+/* ===== LANGUAGE SWITCHER ===== */
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    padding: 0.25rem 0.35rem;
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
+
+.lang-switch:hover {
+    border-color: rgba(0, 255, 136, 0.3);
+}
+
+.lang-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 0.35rem 0.65rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.lang-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.lang-btn.active {
+    background: rgba(0, 255, 136, 0.15);
+    border-color: rgba(0, 255, 136, 0.4);
+    color: var(--primary);
+    box-shadow: 0 0 12px rgba(0, 255, 136, 0.25);
+}
+
+.flag-icon {
+    display: inline-block;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.lang-text {
+    line-height: 1;
+}
+
+.lang-separator {
+    color: var(--glass-border);
+    font-size: 0.75rem;
+    user-select: none;
 }
 
 /* ===== HERO SECTION ===== */
@@ -852,15 +919,28 @@ body {
     }
 
     .nav-container {
-        padding: 0 1rem;
+        padding: 0.7rem 1rem;
         flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .logo {
+        order: 1;
+    }
+
+    .lang-switch {
+        order: 2;
+        margin-left: auto;
     }
 
     .nav-menu {
+        order: 3;
         flex: 0 0 100%;
         gap: 0.7rem;
         justify-content: center;
         flex-wrap: wrap;
+        margin-left: 0;
+        margin-top: 0.6rem;
     }
 
     .nav-link {
@@ -1015,6 +1095,17 @@ body {
     .btn-download {
         padding: 0.5rem 0.8rem;
         font-size: 0.6rem;
+    }
+
+    .lang-btn {
+        padding: 0.25rem 0.45rem;
+        font-size: 0.7rem;
+        gap: 0.3rem;
+    }
+
+    .flag-icon {
+        width: 15px;
+        height: 11px;
     }
 
     /* Hero Mobile Pequeño */

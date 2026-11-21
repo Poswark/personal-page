@@ -48,13 +48,39 @@
                 <span class="logo-text">{ poswark }</span>
             </div>
             <div class="nav-menu">
-                <a href="#hero" class="nav-link active">Inicio</a>
-                <a href="#about" class="nav-link">Acerca</a>
-                <a href="#experience" class="nav-link">Experiencia</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#contact" class="nav-link">Contacto</a>
-                <button class="btn-download" id="btn-download" aria-label="Descargar hoja de vida en PDF">
-                    ↓ Descargar HV
+                <a href="#hero" class="nav-link active" data-i18n="nav.home">Inicio</a>
+                <a href="#about" class="nav-link" data-i18n="nav.about">Acerca</a>
+                <a href="#experience" class="nav-link" data-i18n="nav.experience">Experiencia</a>
+                <a href="#skills" class="nav-link" data-i18n="nav.skills">Skills</a>
+                <a href="#contact" class="nav-link" data-i18n="nav.contact">Contacto</a>
+                <button class="btn-download" id="btn-download" aria-label="Descargar hoja de vida en PDF" data-i18n-aria="nav.download_aria">
+                    <span data-i18n="nav.download">↓ Descargar HV</span>
+                </button>
+            </div>
+            <div class="lang-switch" role="group" aria-label="Selector de idioma / Language selector">
+                <button type="button" class="lang-btn active" data-lang="es" aria-label="Cambiar a Español" title="Español" aria-pressed="true">
+                    <svg class="flag-icon" viewBox="0 0 640 480" width="18" height="13" aria-hidden="true">
+                        <rect width="640" height="480" fill="#c60b1e"/>
+                        <rect width="640" height="240" y="120" fill="#ffc400"/>
+                    </svg>
+                    <span class="lang-text">ES</span>
+                </button>
+                <span class="lang-separator" aria-hidden="true">/</span>
+                <button type="button" class="lang-btn" data-lang="en" aria-label="Switch to English" title="English" aria-pressed="false">
+                    <svg class="flag-icon" viewBox="0 0 640 480" width="18" height="13" aria-hidden="true">
+                        <rect width="640" height="480" fill="#bd3d44"/>
+                        <path stroke="#fff" stroke-width="37" d="M0 55.5h640M0 129.5h640M0 203.5h640M0 277.5h640M0 351.5h640M0 425.5h640"/>
+                        <rect width="260" height="259" fill="#192f5d"/>
+                        <g fill="#fff">
+                            <circle cx="35" cy="30" r="7"/><circle cx="85" cy="30" r="7"/><circle cx="135" cy="30" r="7"/><circle cx="185" cy="30" r="7"/><circle cx="230" cy="30" r="7"/>
+                            <circle cx="60" cy="65" r="7"/><circle cx="110" cy="65" r="7"/><circle cx="160" cy="65" r="7"/><circle cx="210" cy="65" r="7"/>
+                            <circle cx="35" cy="100" r="7"/><circle cx="85" cy="100" r="7"/><circle cx="135" cy="100" r="7"/><circle cx="185" cy="100" r="7"/><circle cx="230" cy="100" r="7"/>
+                            <circle cx="60" cy="135" r="7"/><circle cx="110" cy="135" r="7"/><circle cx="160" cy="135" r="7"/><circle cx="210" cy="135" r="7"/>
+                            <circle cx="35" cy="170" r="7"/><circle cx="85" cy="170" r="7"/><circle cx="135" cy="170" r="7"/><circle cx="185" cy="170" r="7"/><circle cx="230" cy="170" r="7"/>
+                            <circle cx="60" cy="205" r="7"/><circle cx="110" cy="205" r="7"/><circle cx="160" cy="205" r="7"/><circle cx="210" cy="205" r="7"/>
+                        </g>
+                    </svg>
+                    <span class="lang-text">EN</span>
                 </button>
             </div>
         </div>
@@ -126,20 +152,20 @@
                 <h1 class="title">
                     <span class="gradient-text">GIOVANNY ORJUELA</span>
                 </h1>
-                <p class="subtitle">DevOps & SRE Engineer</p>
-                <p class="description">
+                <p class="subtitle" data-i18n="hero.subtitle">DevOps & SRE Engineer</p>
+                <p class="description" data-i18n="hero.description">
                     8+ años optimizando infraestructuras críticas, automatizando procesos y reduciendo costos operacionales.
                     Especialista en Kubernetes, Jenkins, Ansible y Cloud Architecture.
                 </p>
                 <div class="hero-cta">
-                    <button class="btn btn-primary" onclick="smoothScrollTo('about')">Más sobre mí</button>
-                    <button class="btn btn-secondary" id="btn-contact">Contactar</button>
+                    <button class="btn btn-primary" onclick="smoothScrollTo('about')" data-i18n="hero.btn_about">Más sobre mí</button>
+                    <button class="btn btn-secondary" id="btn-contact" data-i18n="hero.btn_contact">Contactar</button>
                 </div>
             </div>
         </div>
 
         <div class="scroll-indicator" aria-hidden="true">
-            <span>Scroll to discover</span>
+            <span data-i18n="hero.scroll">Scroll to discover</span>
             <svg viewBox="0 0 24 24" width="20" height="20">
                 <path fill="currentColor" d="M7 10l5 5 5-5z"/>
             </svg>
@@ -149,12 +175,12 @@
     <!-- ABOUT SECTION -->
     <section id="about" class="about" aria-label="Acerca de mí">
         <div class="container">
-            <h2 class="section-title">Acerca de mí</h2>
+            <h2 class="section-title" data-i18n="about.title">Acerca de mí</h2>
 
             <div class="about-grid">
                 <div class="glass-card">
-                    <h3>#whoami</h3>
-                    <p>
+                    <h3 data-i18n="about.whoami_title">#whoami</h3>
+                    <p data-i18n="about.whoami_desc">
                         Ingeniero especializado en infraestructura moderna y operaciones en la nube. Mi pasión es
                         transformar operaciones manuales en automatización inteligente, reduciendo costos y mejorando
                         la confiabilidad de sistemas críticos.
@@ -162,24 +188,24 @@
                 </div>
 
                 <div class="glass-card">
-                    <h3>Enfoque</h3>
-                    <p>
+                    <h3 data-i18n="about.focus_title">Enfoque</h3>
+                    <p data-i18n="about.focus_desc">
                         DevOps & SRE: Diseño de pipelines CI/CD, automatización con Ansible, orquestación Kubernetes
                         y optimización de costos cloud (FinOps).
                     </p>
                 </div>
 
                 <div class="glass-card">
-                    <h3>Tech Stack</h3>
-                    <p>
+                    <h3 data-i18n="about.stack_title">Tech Stack</h3>
+                    <p data-i18n="about.stack_desc">
                         Kubernetes · Docker · Jenkins · Terraform · Ansible · Python · AWS · Azure ·
                         Prometheus · Grafana · IA/ML para infraestructura
                     </p>
                 </div>
 
                 <div class="glass-card">
-                    <h3>Logros</h3>
-                    <p>
+                    <h3 data-i18n="about.achieve_title">Logros</h3>
+                    <p data-i18n="about.achieve_desc">
                         Impulsar transformación digital mediante infraestructura automatizada, observabilidad avanzada
                         y arquitecturas cloud-native resilientes.
                     </p>
@@ -189,19 +215,19 @@
             <div class="stats" role="list" aria-label="Estadísticas profesionales">
                 <div class="stat" role="listitem">
                     <h4>8+</h4>
-                    <p>Años de Experiencia</p>
+                    <p data-i18n="stats.exp">Años de Experiencia</p>
                 </div>
                 <div class="stat" role="listitem">
                     <h4>50+</h4>
-                    <p>Servidores Administrados</p>
+                    <p data-i18n="stats.servers">Servidores Administrados</p>
                 </div>
                 <div class="stat" role="listitem">
                     <h4>99.8%</h4>
-                    <p>Disponibilidad</p>
+                    <p data-i18n="stats.uptime">Disponibilidad</p>
                 </div>
                 <div class="stat" role="listitem">
                     <h4>5+</h4>
-                    <p>Certificaciones</p>
+                    <p data-i18n="stats.certs">Certificaciones</p>
                 </div>
             </div>
         </div>
@@ -210,23 +236,23 @@
     <!-- EXPERIENCE SECTION -->
     <section id="experience" class="experience" aria-label="Experiencia profesional">
         <div class="container">
-            <h2 class="section-title">Experiencia</h2>
+            <h2 class="section-title" data-i18n="exp.title">Experiencia</h2>
 
             <div class="experience-timeline">
                 <div class="timeline-item active">
                     <div class="timeline-dot" aria-hidden="true"></div>
                     <div class="timeline-content glass-card">
                         <div class="exp-header">
-                            <h3>DevOps y SRE Engineer</h3>
-                            <span class="company-badge">Scotiabank Colpatria</span>
+                            <h3 data-i18n="exp.scotia.role">DevOps y SRE Engineer</h3>
+                            <span class="company-badge">DAVibank</span>
                         </div>
-                        <p class="date"><time datetime="2023-08">Agosto 2023</time> — Actualidad</p>
+                        <p class="date" data-i18n="exp.scotia.date"><time datetime="2023-08">Agosto 2023</time> — Actualidad</p>
                         <ul class="achievements">
-                            <li><span class="accent" aria-hidden="true">→</span> Migrar aplicaciones a cloud native infrastructure GCP - Kubernetes</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Crear playbooks en Ansible para automatización de tareas</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Jenkins CI/CD pipelines para nuestro IDP</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Implementar la estrategia de FinOps | 35% cloud cost optimization</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Mejorar la resiliencia de las aplicaciones en entornos cloud</li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.scotia.task1">Migrar aplicaciones a cloud native infrastructure GCP - Kubernetes</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.scotia.task2">Crear playbooks en Ansible para automatización de tareas</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.scotia.task3">Jenkins CI/CD pipelines para nuestro IDP</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.scotia.task4">Implementar la estrategia de FinOps | 35% cloud cost optimization</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.scotia.task5">Mejorar la resiliencia de las aplicaciones en entornos cloud</span></li>
                         </ul>
                     </div>
                 </div>
@@ -235,16 +261,16 @@
                     <div class="timeline-dot" aria-hidden="true"></div>
                     <div class="timeline-content glass-card">
                         <div class="exp-header">
-                            <h3>Site Reliability Engineering (SRE)</h3>
-                            <span class="company-badge">Periferia IT Group - Scotiabank Colpatria</span>
+                            <h3 data-i18n="exp.periferia.role">Site Reliability Engineering (SRE)</h3>
+                            <span class="company-badge">Periferia IT Group - DAVibank</span>
                         </div>
-                        <p class="date"><time datetime="2021-07">Julio 2021</time> — <time datetime="2023-08">Agosto 2023</time></p>
+                        <p class="date" data-i18n="exp.periferia.date"><time datetime="2021-07">Julio 2021</time> — <time datetime="2023-08">Agosto 2023</time></p>
                         <ul class="achievements">
-                            <li><span class="accent" aria-hidden="true">→</span> Creación de CI/CD con Jenkins</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Definición de SLO y SLI</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Diseño de soluciones orientadas a confiabilidad, disponibilidad, rendimiento, resiliencia, seguridad y automatización</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Lenguaje de programación Python y scripting</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Implementación y mejora de informes postmortem</li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.periferia.task1">Creación de CI/CD con Jenkins</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.periferia.task2">Definición de SLO y SLI</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.periferia.task3">Diseño de soluciones orientadas a confiabilidad, disponibilidad, rendimiento, resiliencia, seguridad y automatización</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.periferia.task4">Lenguaje de programación Python y scripting</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.periferia.task5">Implementación y mejora de informes postmortem</span></li>
                         </ul>
                     </div>
                 </div>
@@ -253,16 +279,16 @@
                     <div class="timeline-dot" aria-hidden="true"></div>
                     <div class="timeline-content glass-card">
                         <div class="exp-header">
-                            <h3>Administrador Unix y Kubernetes</h3>
-                            <span class="company-badge">SETI S.A.S - Cliente ATH</span>
+                            <h3 data-i18n="exp.seti.role">Administrador Unix y Kubernetes</h3>
+                            <span class="company-badge" data-i18n="exp.seti.company">SETI S.A.S - Cliente ATH</span>
                         </div>
-                        <p class="date"><time datetime="2019-01">Enero 2019</time> — <time datetime="2021-07">Julio 2021</time></p>
+                        <p class="date" data-i18n="exp.seti.date"><time datetime="2019-01">Enero 2019</time> — <time datetime="2021-07">Julio 2021</time></p>
                         <ul class="achievements">
-                            <li><span class="accent" aria-hidden="true">→</span> Administración de Sistema Operativo Linux RHEL 7</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Implementar y administrar clúster de Kubernetes HA, Docker EE Mirantis Kubernetes Engine</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Implementación de playbooks con Ansible</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Monitoreo de servidores mediante Grafana y Prometheus</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Hardening de las plataformas administradas (Red Hat 6 y 7)</li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.seti.task1">Administración de Sistema Operativo Linux RHEL 7</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.seti.task2">Implementar y administrar clúster de Kubernetes HA, Docker EE Mirantis Kubernetes Engine</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.seti.task3">Implementación de playbooks con Ansible</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.seti.task4">Monitoreo de servidores mediante Grafana y Prometheus</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.seti.task5">Hardening de las plataformas administradas (Red Hat 6 y 7)</span></li>
                         </ul>
                     </div>
                 </div>
@@ -271,17 +297,17 @@
                     <div class="timeline-dot" aria-hidden="true"></div>
                     <div class="timeline-content glass-card">
                         <div class="exp-header">
-                            <h3>Administrador Unix</h3>
-                            <span class="company-badge">INDRA - Cliente Claro</span>
+                            <h3 data-i18n="exp.indra.role">Administrador Unix</h3>
+                            <span class="company-badge" data-i18n="exp.indra.company">INDRA - Cliente Claro</span>
                         </div>
-                        <p class="date"><time datetime="2018-01">Enero 2018</time> — <time datetime="2018-12">Diciembre 2018</time></p>
+                        <p class="date" data-i18n="exp.indra.date"><time datetime="2018-01">Enero 2018</time> — <time datetime="2018-12">Diciembre 2018</time></p>
                         <ul class="achievements">
-                            <li><span class="accent" aria-hidden="true">→</span> Administración de Sistema Operativo Unix nivel 2</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Solución de incidentes de complejidad mediana y alta</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Automatización de despliegues utilizando GitOps, Helm y Jenkins</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Gestión de alarmas de mediano y mayor impacto (RHEL y AIX)</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Remediación de vulnerabilidades y actualización de los SO</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Hardening de las plataformas administradas (Red Hat 6 y 7)</li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.indra.task1">Administración de Sistema Operativo Unix nivel 2</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.indra.task2">Solución de incidentes de complejidad mediana y alta</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.indra.task3">Automatización de despliegues utilizando GitOps, Helm y Jenkins</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.indra.task4">Gestión de alarmas de mediano y mayor impacto (RHEL y AIX)</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.indra.task5">Remediación de vulnerabilidades y actualización de los SO</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.indra.task6">Hardening de las plataformas administradas (Red Hat 6 y 7)</span></li>
                         </ul>
                     </div>
                 </div>
@@ -290,15 +316,15 @@
                     <div class="timeline-dot" aria-hidden="true"></div>
                     <div class="timeline-content glass-card">
                         <div class="exp-header">
-                            <h3>Administrador Sistemas Operativos Junior - IBM PSeries</h3>
+                            <h3 data-i18n="exp.dbsystem.role">Administrador Sistemas Operativos Junior - IBM PSeries</h3>
                             <span class="company-badge">DB-SYSTEM LTDA</span>
                         </div>
-                        <p class="date"><time datetime="2016-11">Noviembre 2016</time> — <time datetime="2017-12">Diciembre 2017</time></p>
+                        <p class="date" data-i18n="exp.dbsystem.date"><time datetime="2016-11">Noviembre 2016</time> — <time datetime="2017-12">Diciembre 2017</time></p>
                         <ul class="achievements">
-                            <li><span class="accent" aria-hidden="true">→</span> Administración y optimización de servidores AIX</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Gestión de monitoreo de performance (CPU, RAM, IO)</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Respuesta a requerimientos técnicos e incidentes de SO</li>
-                            <li><span class="accent" aria-hidden="true">→</span> Gestión de estado de usuarios, cambio de contraseñas y validación de parámetros</li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.dbsystem.task1">Administración y optimización de servidores AIX</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.dbsystem.task2">Gestión de monitoreo de performance (CPU, RAM, IO)</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.dbsystem.task3">Respuesta a requerimientos técnicos e incidentes de SO</span></li>
+                            <li><span class="accent" aria-hidden="true">→</span> <span data-i18n="exp.dbsystem.task4">Gestión de estado de usuarios, cambio de contraseñas y validación de parámetros</span></li>
                         </ul>
                     </div>
                 </div>
@@ -309,11 +335,11 @@
     <!-- SKILLS SECTION -->
     <section id="skills" class="skills" aria-label="Habilidades técnicas">
         <div class="container">
-            <h2 class="section-title">Habilidades y Experiencia</h2>
+            <h2 class="section-title" data-i18n="skills.title">Habilidades y Experiencia</h2>
 
             <div class="skills-grid">
                 <div class="skill-category glass-card">
-                    <h3>🐧 Sistemas Operativos</h3>
+                    <h3 data-i18n="skills.os">🐧 Sistemas Operativos</h3>
                     <div class="tags">
                         <span class="tag">Linux (RHEL)</span>
                         <span class="tag">AIX</span>
@@ -323,7 +349,7 @@
                 </div>
 
                 <div class="skill-category glass-card">
-                    <h3>☸️ Kubernetes & Orquestación</h3>
+                    <h3 data-i18n="skills.k8s">☸️ Kubernetes & Orquestación</h3>
                     <div class="tags">
                         <span class="tag highlight">Kubernetes HA</span>
                         <span class="tag highlight">Helm</span>
@@ -333,7 +359,7 @@
                 </div>
 
                 <div class="skill-category glass-card">
-                    <h3>🐳 Contenedorización</h3>
+                    <h3 data-i18n="skills.containers">🐳 Contenedorización</h3>
                     <div class="tags">
                         <span class="tag highlight">Docker</span>
                         <span class="tag">Docker Compose</span>
@@ -342,7 +368,7 @@
                 </div>
 
                 <div class="skill-category glass-card">
-                    <h3>⚙️ CI/CD & Automatización</h3>
+                    <h3 data-i18n="skills.cicd">⚙️ CI/CD & Automatización</h3>
                     <div class="tags">
                         <span class="tag highlight">Jenkins</span>
                         <span class="tag highlight">Ansible</span>
@@ -352,7 +378,7 @@
                 </div>
 
                 <div class="skill-category glass-card">
-                    <h3>☁️ Plataformas Cloud</h3>
+                    <h3 data-i18n="skills.cloud">☁️ Plataformas Cloud</h3>
                     <div class="tags">
                         <span class="tag highlight">AWS</span>
                         <span class="tag highlight">Azure</span>
@@ -362,7 +388,7 @@
                 </div>
 
                 <div class="skill-category glass-card">
-                    <h3>🐍 Programación</h3>
+                    <h3 data-i18n="skills.programming">🐍 Programación</h3>
                     <div class="tags">
                         <span class="tag highlight">Python</span>
                         <span class="tag">Bash/Shell</span>
@@ -371,7 +397,7 @@
                 </div>
 
                 <div class="skill-category glass-card">
-                    <h3>📊 Monitoreo & Observabilidad</h3>
+                    <h3 data-i18n="skills.monitoring">📊 Monitoreo & Observabilidad</h3>
                     <div class="tags">
                         <span class="tag highlight">Prometheus</span>
                         <span class="tag highlight">Grafana</span>
@@ -380,11 +406,19 @@
                 </div>
 
                 <div class="skill-category glass-card">
-                    <h3>🤖 IA & Machine Learning</h3>
+                    <h3 data-i18n="skills.ai">🤖 IA & Machine Learning</h3>
                     <div class="tags">
-                        <span class="tag highlight">Detección de Anomalías</span>
-                        <span class="tag highlight">Predicción de Capacidad</span>
+                        <span class="tag highlight" data-i18n="skills.ai_anomalies">Detección de Anomalías</span>
+                        <span class="tag highlight" data-i18n="skills.ai_capacity">Predicción de Capacidad</span>
                         <span class="tag">MLOps</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3 data-i18n="skills.languages">🌐 Idiomas</h3>
+                    <div class="tags">
+                        <span class="tag highlight" data-i18n="skills.lang_es">Español (Nativo)</span>
+                        <span class="tag highlight" data-i18n="skills.lang_en">Inglés (B1 - Intermedio)</span>
                     </div>
                 </div>
             </div>
@@ -394,13 +428,15 @@
     <!-- CERTIFICATIONS -->
     <section id="certifications" class="certifications" aria-label="Certificaciones">
         <div class="container">
-            <h2 class="section-title">Certificaciones</h2>
+            <h2 class="section-title" data-i18n="certs.title">Certificaciones</h2>
             <p class="section-subtitle">
-                Revise aquí los certificados que he obtenido hasta el momento.
+                <span data-i18n="certs.subtitle">Revise aquí los certificados que he obtenido hasta el momento.</span>
                 <a href="https://www.credly.com/users/giovanny-orjuela/badges"
                    target="_blank"
                    rel="noopener noreferrer"
-                   aria-label="Ver todas las certificaciones en Credly (abre en nueva pestaña)">
+                   aria-label="Ver todas las certificaciones en Credly (abre en nueva pestaña)"
+                   data-i18n="certs.credly"
+                   data-i18n-aria="certs.credly_aria">
                     Ver todos en Credly →
                 </a>
             </p>
@@ -447,13 +483,13 @@
     <!-- CONTACT SECTION -->
     <section id="contact" class="contact" aria-label="Información de contacto">
         <div class="container">
-            <h2 class="section-title">Contacto</h2>
+            <h2 class="section-title" data-i18n="contact.title">Contacto</h2>
 
             <div class="contact-content">
                 <div class="contact-item glass-card">
                     <span class="contact-icon" aria-hidden="true">📧</span>
                     <div>
-                        <p>Correo electrónico</p>
+                        <p data-i18n="contact.email">Correo electrónico</p>
                         <a href="mailto:giovannyorjuel2@gmail.com">giovannyorjuelaX@gmail.com</a>
                     </div>
                 </div>
@@ -461,7 +497,7 @@
                 <div class="contact-item glass-card">
                     <span class="contact-icon" aria-hidden="true">📱</span>
                     <div>
-                        <p>Teléfono</p>
+                        <p data-i18n="contact.phone">Teléfono</p>
                         <a href="tel:+57311479XXXX">+57 311 479 XXXX</a>
                     </div>
                 </div>
@@ -469,7 +505,7 @@
                 <div class="contact-item glass-card">
                     <span class="contact-icon" aria-hidden="true">💼</span>
                     <div>
-                        <p>LinkedIn</p>
+                        <p data-i18n="contact.linkedin">LinkedIn</p>
                         <a href="https://linkedin.com/in/giovannyorjuel2"
                            target="_blank"
                            rel="noopener noreferrer">linkedin.com/in/giovannyorjuel2</a>
@@ -479,7 +515,7 @@
                 <div class="contact-item glass-card">
                     <span class="contact-icon" aria-hidden="true">📍</span>
                     <div>
-                        <p>Ubicación</p>
+                        <p data-i18n="contact.location">Ubicación</p>
                         <span>Bogotá, Colombia</span>
                     </div>
                 </div>
@@ -516,7 +552,7 @@
                     </a>
                 </div>
             </div>
-            <p class="footer-copy">© 2026 Giovanny Orjuela. ❤️ Todos los derechos reservados.</p>
+            <p class="footer-copy" data-i18n="footer.copy">© 2026 Giovanny Orjuela. ❤️ Todos los derechos reservados.</p>
         </div>
     </footer>
 

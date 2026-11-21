@@ -19,4 +19,6 @@ services:
       - ./index.html:/usr/share/nginx/html/index.html:ro
       - ./styles.css:/usr/share/nginx/html/styles.css:ro
       - ./script.js:/usr/share/nginx/html/script.js:ro
+      - ./cv.pdf:/usr/share/nginx/html/cv.pdf:ro
+      - ./cv-en.pdf:/usr/share/nginx/html/cv-en.pdf:ro
     restart: unless-stopped
